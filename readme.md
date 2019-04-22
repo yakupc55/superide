@@ -1,0 +1,1 @@
+bu açıklama sayfası
