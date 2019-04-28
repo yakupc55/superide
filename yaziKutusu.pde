@@ -3,6 +3,9 @@ class yaziKutusu extends _elemanYapi{
   dikdortgen imlec;
   dikdortgen yaziAlani;
   int sayacImlec;
+  int imlecKonum; // bu hangi harften sonra imlecin geldiğini bilmek için oluşturuldu
+  float imlecOncesi;
+  float imlecSonrasi;
   PGraphics grafik;
   String yazi;
   boolean durumImlec=false;
@@ -11,11 +14,13 @@ class yaziKutusu extends _elemanYapi{
 
   ArrayList<Float> uzunluklar=new ArrayList<Float>();
   yaziKutusu(float gx,float gy,float gw,float gh){
-      yazi=""; toplamUzunluk=0;
+      yazi=""; toplamUzunluk=0; imlecOncesi=0; imlecOncesi=0;
+      imlecKonum=-1;
       yaziAlani=new dikdortgen(2,2,gw-4,gh-4);
       // yazi sınırından dör kestik 2 önden iki sondan 2 tanesi alan kaybı
       // 2 tanesi ise boşluk oluşturmak için kayma yapıldı.
-     anaKarekterGirisi = true; 
+     anaKarekterGirisi = true;
+     ozelKarekterGirisi = true;
        /*
    Kullanılacak yapılar true hale getiriliyor    
     */
@@ -80,7 +85,7 @@ grafik.beginDraw();
   grafik.text(yazi,yaziAlani.x,0);
   //text("aktif",alanim.x,alanim.y);
  if(sureDagilimi(20,15)){
-  grafik.line(imlec.x,imlec.y,imlec.w,imlec.h);
+  grafik.line(imlec.x,imlec.y,imlec.x,imlec.h);
  }  
 //tüm grafiksel işlemlerin bundan önce bitmesi gerekiyor.  
 grafik.endDraw();
@@ -93,13 +98,77 @@ void anaKarekterFonksiyonu(int tus){
  yazi+=key;
  uzunluklar.add(yazia[key]);
  toplamUzunluk+=yazia[key];
- println(uzunluklar.get(yazi.length()-1));
- println(yazi);
+
+ // burdaki imlec sonrası toplam yapısı hesaplama algoritmalarını rahatlamak amacıyla yapılmıştır.
+// println(uzunluklar.get(yazi.length()-1));
+// println(yazi);
  if(toplamUzunluk>yaziAlani.w){
    yaziAlani.x=2-(toplamUzunluk-yaziAlani.w);
  }// if sonu
-
+ // sağ tuş olaylarında yazi alani x değeri önemli olduğu için ondan sonra çalışacak şekilde ayarlandı
+ sagTusOlaylari();
 }// fonksiyon sonu
+
+void ozelKarekterFonksiyonu(int tus){
+  //println("başarılı bir şekilde çalıştı");
+  if(tus==39){
+    // 39 klavyeden sağ tuşu ifade ediyor.
+    sagTusOlaylari();
+  }
+  else if(tus==37){
+    // 37 klavyede sol tuşu ifade ediyor.
+   solTusOlaylari();
+  }
+}
+
+
+void sagTusOlaylari(){
+  if(yazi.length()-1>imlecKonum){
+   println("çalışma için uygun sağ tuş");
+   imlecKonum++;
+   imlecHesaplaIleri();
+   teknikBilgilendirme();
+  }
+}
+
+void solTusOlaylari(){
+ if(imlecKonum>-1){
+   println("çalışma için uygun sol tuş"); 
+   imlecKonum--;
+   imlecHesaplaGeri();
+  teknikBilgilendirme();
+  }
+}
+
+void teknikBilgilendirme(){
+   println("imlec konum değeri : "+imlecKonum);
+   println("imlec son değeri : "+imlecSonrasi);
+   println("imlec on değeri : "+imlecOncesi);
+   println("yazı alanı x : "+yaziAlani.x);
+}
+
+void imlecHesaplaIleri(){
+  float ekKonum=yazia[int(yazi.charAt(imlecKonum))];
+  println("ek konum : "+ekKonum);
+  println("yazi length : "+yazi.length());
+  if(yazi.length()-1>imlecKonum)
+  imlecSonrasi-=ekKonum;
+  imlecOncesi+=ekKonum;
+  // 2 lik boşluk ile imlecin ulaştığı yer arasındaki mesafeyi toplamış oluyoruz.
+  //sonradan yazi alan x eklediğimiz için oda orjinalinde 2 yi ekli verdiği için tekrar toplama
+  // gereği duymadık
+  imlec.x=imlecOncesi+yaziAlani.x;
+}
+
+void imlecHesaplaGeri(){
+  // imlec konumun 1 ile toplanmasının sebebi geri gelme olayı öndeki karekterin uzunluğuna bağlı olduğu için
+  float ekKonum=yazia[int(yazi.charAt(imlecKonum+1))];
+  println("ek konum : "+ekKonum);
+  imlecSonrasi+=ekKonum;
+  imlecOncesi-=ekKonum;
+  // 2 lik boşluk ile imlecin ulaştığı yer arasındaki mesafeyi toplamış oluyoruz.
+  imlec.x=2+imlecOncesi;
+}
 
 void ilkCizim(){
   grafik.beginDraw();
@@ -120,6 +189,10 @@ image(grafik,alanim.x,alanim.y);
 }
 
 boolean anaKarekterGirisiKontrol(){
+ return aktiflik;
+}// fonksiyon sonu
+
+boolean ozelKarekterGirisiKontrol(){
  return aktiflik;
 }// fonksiyon sonu
 

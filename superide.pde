@@ -32,7 +32,7 @@ text("CENTER,TOP çşiğü ÇŞİĞÜ", 0, 0);
  */
  
  pKontrol.draw();
- 
+
  }// çizim yapısının sonu
 
 

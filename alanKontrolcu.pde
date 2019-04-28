@@ -4,6 +4,8 @@ class alanKontrolcu{
  int aktifAlan=0; //ana alan demek oluyor 
  // bu direk aktif olarak betimlenen alan ana alanı temsil ediyor.
  int sonAktifAlan=-1; // -1 de çevrim dışı bir yapılanma oluyor
+ // eğer aktif edilme alanını kontrol eden for boş dönerse yapılmak istenenler için oluşturulan bir değişken
+ boolean bosForAktiflik=true; 
 ArrayList<_alanYapi> alanlar=new ArrayList<_alanYapi>();
  alanKontrolcu(){
  //sisteme ana alanı eklemiş oluyoruz.   
@@ -35,7 +37,17 @@ void keyPressed(int tus){
   // println("alan kontrol içi kısmında başarılı bir çalışma");
   //println("yazılan karekter = "+key+"  sayısal karşılığı = "+str(int(key)));
  if(tus==CODED){
- //  println("yazılan özel karekter = "+keyCode+"  sayısal karşılığı = "+str(int(keyCode)));
+//   println("yazılan özel karekter = "+keyCode+"  sayısal karşılığı = "+str(int(keyCode)));
+
+for(int i = 0; i<alanlar.size();i++){
+ //    println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
+   if(alanlar.get(i).elemanim.ozelKarekterGirisiKontrol()){
+ //     println("if  kısmında başarılı bir çalışma");
+   alanlar.get(i).elemanim.ozelKarekterFonksiyonu(keyCode);
+   bosForAktiflik=false;
+     break;
+   }
+  }// for sonu
  }
  // enter key number=10
  // silme numarası
@@ -71,9 +83,10 @@ void mousePressed(){
  void mousePressed(int x, int y){
  // ilk kısım eski aktif kısmın değiştirilmesi ve yeni aktif kısmın atanması
  //aktif alan ataması için alan taraması işlemi yapılacak.
+ bosForAktiflik=true;
  for(int i = 0; i<alanlar.size();i++){
   if(alanTaramaSonucu(i,x,y)){
-    
+    bosForAktiflik=false;
     // son aktif olan alanı devre dışı bırakıyoruz. Şimdiki mimaride sadece tek yönlü bir aktif mekanizmaya odaklanmış durumdayız.
     if(sonAktifAlan>=0){
       // burda aktif alanımızı devre dışı bırakıyoruz.
@@ -89,6 +102,13 @@ void mousePressed(){
     break;
   }
 }//for sonu
+if(sonAktifAlan>=0 && bosForAktiflik==true){
+  //öncelikle son aktif alanı kapattık sonrada aktif olacak bir alan kalmadığı için son aktif alanıda -1 leyerek kapatmış olduk.
+  alanlar.get(sonAktifAlan).elemanim.aktiflik=false;
+  alanlar.get(sonAktifAlan).elemanim.aktiflikBitimi();
+  sonAktifAlan=-1;
+}
+// hiç bir alana dek gelmese dahi son aktif alanı kapatıyoruz. son aktifliği ise -1 yapıyoruz.
 
 }// fonksiyon sonu
 
