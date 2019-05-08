@@ -1,6 +1,10 @@
 // alanlardaki kontrolü sağlamak için yapıldı.
 
 class alanKontrolcu{
+  boolean ctrlDurumu=false;
+  boolean altDurumu=false;
+  boolean shiftDurumu=false;
+  int durumNo=0;
  int aktifAlan=0; //ana alan demek oluyor 
  // bu direk aktif olarak betimlenen alan ana alanı temsil ediyor.
  int sonAktifAlan=-1; // -1 de çevrim dışı bir yapılanma oluyor
@@ -24,7 +28,7 @@ ArrayList<_alanYapi> alanlar=new ArrayList<_alanYapi>();
   void draw(){
     
    for(int i = 0; i<alanlar.size();i++){
-   alanlar.get(i).elemanim.draw(); //<>//
+   alanlar.get(i).elemanim.draw(); //<>// //<>//
   }// for sonu
 }// fonksiyon sonu
 
@@ -32,23 +36,120 @@ void keyPressed(){
   
   
 }// fonksiyon sonu
+void keyReleased(int tus){
+ //  println("yazılan karekter = "+tus+"  sayısal karşılığı = "+str(int(tus)));
+ 
+  if(tus==CODED){
+ //  println("yazılan özel karekter = "+keyCode+"  sayısal karşılığı = "+str(int(keyCode)));
+   
+  }
+   if (tus == CODED) {
+   if(keyCode>=16 && keyCode<=18){
+  switch(keyCode){
+  case 16: shiftDurumu=false; break;    
+  case 17: ctrlDurumu=false; break;  
+  case 18: altDurumu=false; break;  
+  }// switch sonu
+   }// if sonu
+   }// if sonu
+  
+}// fonksiyon sonu
+
+//eğer her hangi basılı tuş durumu varsa onu kontrol etmemizi sağlayacak
+boolean basiliKarekter(){
+ println("ctrl durumu : "+ctrlDurumu+"alt durumu : "+altDurumu+"shift durumu : "+shiftDurumu);
+durumNo=((ctrlDurumu==true)?4:0)+((altDurumu==true)?2:0)+((shiftDurumu==true)?1:0);
+//println(durumNo);
+return (ctrlDurumu||shiftDurumu||altDurumu);
+
+}
 
 void keyPressed(int tus){
   // println("alan kontrol içi kısmında başarılı bir çalışma");
   //println("yazılan karekter = "+key+"  sayısal karşılığı = "+str(int(key)));
- if(tus==CODED){
-//   println("yazılan özel karekter = "+keyCode+"  sayısal karşılığı = "+str(int(keyCode)));
-
+  if(basiliKarekter()){
+  //  println("basili karekter çalışması başarılı");
+  if(tus==CODED){
+ //  println("yazılan özel karekter = "+keyCode+"  sayısal karşılığı = "+str(int(keyCode)));
+   //17 ctrl ve 18 alt oluyo shift ise 16 oluyo
+if(keyCode>=16 && keyCode<=18){
+ // println("buraya girdi");
+  switch(keyCode){
+  case 16: shiftDurumu=true; break;    
+  case 17: ctrlDurumu=true; break;  
+  case 18: altDurumu=true; break;  
+  }
+  
+}// if sonu
+else{
 for(int i = 0; i<alanlar.size();i++){
- //    println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
+  //   println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
    if(alanlar.get(i).elemanim.ozelKarekterGirisiKontrol()){
  //     println("if  kısmında başarılı bir çalışma");
    alanlar.get(i).elemanim.ozelKarekterFonksiyonu(keyCode);
-   bosForAktiflik=false;
+     break;
+   }
+  }// for sonu
+ }// if sonu
+ }// else sonu
+ // enter key number=10
+ // silme numarası
+ if((tus>=32 && tus<127)||(tus>=128 && tus<352)){
+   // normal klavye girişi olduğunda olacak işlemler burada yapılandırılacak
+ //     println("normal tuş girişi kısmında başarılı bir çalışma");
+   for(int i = 0; i<alanlar.size();i++){
+   //  println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
+   if(alanlar.get(i).elemanim.anaKarekterGirisiKontrolBasili()){
+   //   println("if  kısmında başarılı bir çalışma");
+   alanlar.get(i).elemanim.anaKarekterFonksiyonuBasili(tus,durumNo);
      break;
    }
   }// for sonu
  }
+ 
+ if(tus==10){
+   
+   
+ }// entera basıldığında olacak
+ 
+  if(tus==8){
+   // kod aktif alana gönderilip öyle çalıştırılacak.
+   for(int i = 0; i<alanlar.size();i++){
+  //   println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
+   if(alanlar.get(i).elemanim.silmeTusuGirisiKontrol()){
+ //     println("if  kısmında başarılı bir çalışma");
+   alanlar.get(i).elemanim.silmeTusuFonksiyonu();
+     break;
+   }
+  }// for sonu
+ }// silme olduğunda olacaklar
+  }//else sonu
+  
+  
+  
+  else{
+ if(tus==CODED){
+ //  println("yazılan özel karekter = "+keyCode+"  sayısal karşılığı = "+str(int(keyCode)));
+   //17 ctrl ve 18 alt oluyo shift ise 16 oluyo
+if(keyCode>=16 && keyCode<=18){
+  switch(keyCode){
+  case 16: shiftDurumu=true; break;    
+  case 17: ctrlDurumu=true; break;  
+  case 18: altDurumu=true; break;  
+  }
+  
+}// if sonu
+else{
+for(int i = 0; i<alanlar.size();i++){
+  //   println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
+   if(alanlar.get(i).elemanim.ozelKarekterGirisiKontrol()){
+ //     println("if  kısmında başarılı bir çalışma");
+   alanlar.get(i).elemanim.ozelKarekterFonksiyonu(keyCode);
+     break;
+   }
+  }// for sonu
+ }// if sonu
+ }// else sonu
  // enter key number=10
  // silme numarası
  if((tus>=32 && tus<127)||(tus>=128 && tus<352)){
@@ -64,17 +165,25 @@ for(int i = 0; i<alanlar.size();i++){
   }// for sonu
  }
  
- if(key==10){
+ if(tus==10){
    
    
  }// entera basıldığında olacak
  
-  if(key==8){
+  if(tus==8){
    // kod aktif alana gönderilip öyle çalıştırılacak.
-   
+   for(int i = 0; i<alanlar.size();i++){
+  //   println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
+   if(alanlar.get(i).elemanim.silmeTusuGirisiKontrol()){
+ //     println("if  kısmında başarılı bir çalışma");
+   alanlar.get(i).elemanim.silmeTusuFonksiyonu();
+     break;
+   }
+  }// for sonu
  }// silme olduğunda olacaklar
+  }//else sonu
   
-}
+}// fonksiyon sonu
 
 void mousePressed(){
 
@@ -90,6 +199,9 @@ void mousePressed(){
     // son aktif olan alanı devre dışı bırakıyoruz. Şimdiki mimaride sadece tek yönlü bir aktif mekanizmaya odaklanmış durumdayız.
     if(sonAktifAlan>=0){
       // burda aktif alanımızı devre dışı bırakıyoruz.
+      if(alanlar.get(sonAktifAlan).elemanim.mouseTiklamaDurumu)
+      alanlar.get(sonAktifAlan).elemanim.mouseTiklamaFonksiyonu(x,y);
+      
       alanlar.get(sonAktifAlan).elemanim.aktiflik=false;
       alanlar.get(sonAktifAlan).elemanim.aktiflikBitimi();
     }

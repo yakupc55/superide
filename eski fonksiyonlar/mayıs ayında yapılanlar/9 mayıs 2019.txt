@@ -1,0 +1,147 @@
+1) bu kod mouse ile tıklandığında metnin gerekli noktasına ulaşmak için kullanılan temel bir yapı sistemi içermektedir. ona göre bir dizayn dan geçmiş bulunmaktadır. ona göre bir temellendirme içermektedir. ona göre bir yapılandırmaya sahiptir.
+
+while(calismaDurumu){
+  
+   if(fark>=0){   
+  if(akis){
+  geciciImlec+=ekleme;
+  sonUzunluk=yazia[yazi.charAt(geciciImlec)];
+  }
+  else{
+  sonUzunluk=yazia[yazi.charAt(geciciImlec)];
+  geciciImlec+=ekleme;
+  }
+  
+  
+  // burda eğer tiklamanın yakinliğina göre bir işlem yapılıyor
+  if((sonUzunluk/2)>=fark){
+    geciciImlec-=ekleme;
+  }
+  else{
+    geciciToplam+=sonUzunluk;
+  }
+  // fark her türlü düşmek zorunda
+  
+   fark-=sonUzunluk;
+  // teknik sonlandırma
+  if(geciciImlec==0 || (geciciImlec+1)==yazi.length()){
+     println("kara deliğe düştü");
+    calismaDurumu=false; 
+   }
+   }// if bloğu
+   else{
+calismaDurumu=false;
+   }
+    println("geciciImcec : "+geciciImlec+" sonUzunluk : "+ sonUzunluk+" toplam Uzunluk : "+ geciciToplam + " fark : "+fark);
+}// while sonu
+
+*/
+imlecKonum=geciciImlec;
+ //tekrardan sağ veya sola göre bir çalıştırma mekanizması oluşturuluyor
+ if(akis){
+imlecSonrasi-=geciciToplam;
+  imlecOncesi+=geciciToplam;
+ }
+ else{
+imlecSonrasi+=geciciToplam;
+  imlecOncesi-=geciciToplam;
+ }
+  imlec.x=imlecOncesi+yaziAlani.x;
+  imlecDuzenKontrol();
+
+/* while(calismaDurumu){
+   // bu ilk koruma ifi oluyor son rakımlara vardığında sonlandırmak için
+
+ 
+     // artık hangi alana doğru gidiyorsa oraya doğru bir ekleme yapıyor.
+     if(fark>=0){   
+      
+     if(imlecKonum==-1)
+     geciciImlec+=ekleme;  
+     sonUzunluk=yazia[yazi.charAt(geciciImlec)];
+     // bu kısım değişkenlik gösterebilir.  
+     if(sonUzunluk<fark){
+     geciciImlec+=ekleme;
+     geciciToplam+=sonUzunluk;
+     }// if sonu
+     
+     fark-=sonUzunluk;
+     
+     println("geciciImcec : "+geciciImlec+" sonUzunluk : "+ sonUzunluk+" toplam Uzunluk : "+ geciciToplam + " fark : "+fark);
+     
+     }// fark ifi
+     else{
+      calismaDurumu=false; 
+     }// fark elsesi
+
+   if(geciciImlec<=1 || (geciciImlec+1)==yazi.length()){
+     println("kara deliğe düştü");
+    calismaDurumu=false; 
+   }
+ }// while sonu
+ 
+ // tıklanma yakınlığına bağlı olarak geciciImlec değeri ve toplamUzunluk değerleri değişti
+ /*if(fark<=(ilkfark-(geciciToplam-sonUzunluk))){
+   geciciImlec-=ekleme;
+  geciciToplam-=sonUzunluk;
+ }
+ imlecKonum=geciciImlec;
+ //tekrardan sağ veya sola göre bir çalıştırma mekanizması oluşturuluyor
+ if(akis){
+imlecSonrasi-=geciciToplam;
+  imlecOncesi+=geciciToplam;
+ }
+ else{
+imlecSonrasi+=geciciToplam;
+  imlecOncesi-=geciciToplam;
+ }
+  imlec.x=imlecOncesi+yaziAlani.x;
+  imlecDuzenKontrol();*/
+}// hareket kontrol elsesi
+
+/*
+while(calismaDurumu){
+  String son=str(yazi.charAt(imlecKonum));
+  if(imlecKonum+1<yazi.length())
+  println("int imlec yazi : "+yazi.charAt(imlecKonum+1)+" son :"+son);
+ //   float uzunluk= yazia[int(yazi.charAt(imlecKonum))];
+float uzunluk=5;
+if(akis){
+
+   if((imlecKonum+1)==yazi.length()){
+   calismaDurumu=false;
+ }
+ else{
+
+  xDegeri+=uzunluk;
+  sagTusOlaylari();
+ }
+  
+  
+  if(xDegeri<=imlec.x){
+    
+    calismaDurumu=false;
+  }// if sonu
+  else{
+    if((imlecKonum-1)>-1){
+    /*  float sonrakiUzunluk=yazia[yazi.charAt(imlecKonum)];
+      if(xDegeri){
+        
+      
+    }
+  }
+  
+}// ana if sonu
+
+else{
+
+  xDegeri-=uzunluk;
+  solTusOlaylari();
+
+  if(xDegeri>=imlec.x) calismaDurumu=false;
+ 
+}// ana else sonu
+
+
+  
+}// while sonu

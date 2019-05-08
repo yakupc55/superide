@@ -44,7 +44,7 @@ void keyPressed(){
 
 void keyReleased(){
   
-  
+  pKontrol.keyReleased(key);
 }// fonksiyon sonu
 
 void mousePressed(){

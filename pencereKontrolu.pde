@@ -21,6 +21,11 @@ aktifPencere=new anaPencere(this);
   aktifPencere.keyPressed(x);
   }// fonksiyon sonu  
   
+  void keyReleased(int x){
+//     println("pencere kontrol kısmında başarılı bir çalışma");
+  aktifPencere.keyReleased(x);
+  }// fonksiyon sonu  
+  
   void mousePressed(){
  aktifPencere.mousePressed();
 }// fonksiyon sonu

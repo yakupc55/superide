@@ -6,7 +6,7 @@ interface pencere{
   
  void mousePressed();
   void mousePressed(int x,int y);
- 
+void keyReleased(int x);
  void keyPressed();
  void keyPressed(int tus);
 }// sınıf sonu
@@ -42,5 +42,10 @@ class normalPencere implements pencere{
  al.mousePressed(x,y);
 }// fonksiyon sonu
 
+void keyReleased(int x){
+  
+  
+   al.keyReleased(x);
+}
   
 }// sınıf sonu
