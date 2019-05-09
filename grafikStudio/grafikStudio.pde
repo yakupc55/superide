@@ -12,13 +12,13 @@ int r=5;
 void setup(){
 
 pKontrol=new pencereKontrolu();
-  size(640,480); 
+  size(1280,700); 
  // karekterhesap(2);
 frameRate(60);
 }// ana yapının sonu
 
 void draw(){
- // background(0);
+ // background(128);
   
   /*
 stroke(153);
@@ -32,7 +32,7 @@ text("CENTER,TOP çşiğü ÇŞİĞÜ", 0, 0);
  */
  
  pKontrol.draw();
-
+rect(0,0,640,360);
  }// çizim yapısının sonu
 
 
