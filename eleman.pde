@@ -11,6 +11,7 @@ class _elemanYapi implements eleman{
   boolean ozelKarekterGirisi=false;
   boolean silmeTusuGirisi=false;
   boolean mouseTiklamaDurumu=false;
+  boolean kopyalamaYapistirmaGirisi=false;
 
  //bu aktiflik tıklanmayla aktiflik durumuna geçen kodlar için geçerli bir kod yapısını oluşturuyor.
   boolean aktiflik=false;
@@ -27,6 +28,7 @@ class _elemanYapi implements eleman{
   void ozelKarekterFonksiyonu(){    println("üst sınıftaki özel karekter fonksiyonu çalıştı"); }
   void ozelKarekterFonksiyonu(int tus){    println("üst sınıftaki özel karekter fonksiyonu çalıştı"); }
   void silmeTusuFonksiyonu(){    println("üst sınıftaki silme tuşu fonksiyonu çalıştı"); }
+  void kopyalamaYapistirmaFonksiyonu(int tus){    println("üst sınıftaki özel karekter fonksiyonu çalıştı"); }
   
   void aktiflikBitimi(){ println("üst sınıftaki aktiflik bitimi fonksiyonu çalıştı");   }
   void aktiflikBitimiHareket(){ println("üst sınıftaki mouse hareket aktiflik bitimi fonksiyonu çalıştı");   }
@@ -38,6 +40,7 @@ class _elemanYapi implements eleman{
   boolean anaKarekterGirisiKontrolBasili(){ println("üst sınıftaki özel karekter girişi  kontrol fonksiyonu çalıştı"); return false;  }
   boolean ozelKarekterGirisiKontrol(){ println("üst sınıftaki ozel karekter girişi kontrol yapısı çalıştı"); return false;  }
   boolean silmeTusuGirisiKontrol(){ println("üst sınıftaki silme tuşu kontrol girişi çalıştı"); return false;  }
+  boolean kopyalamaYapistirmaGirisiKontrol(){ println("üst sınıftaki silme tuşu kontrol girişi çalıştı"); return false;  }
   
   // bu kısım özel yapılandırmaların bulunduğu kod kısımlarından başlıyor.
   void ozellikDurumu(String mod,boolean durum){println("üst sınıftaki özellik durumu çalıştı"); }

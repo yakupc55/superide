@@ -1,3 +1,4 @@
+
 // öncelik sıralarım ve algoritmik kurgularım bilindik yapılardan çok farklı diye
 //kendi yolu çizmekten niye geri kalayım ki
 

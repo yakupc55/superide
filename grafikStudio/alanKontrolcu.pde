@@ -1,4 +1,4 @@
-// alanlardaki kontrolü sağlamak için yapıldı.
+// alanlardaki kontrolü sağlamak için yapıldı. //<>//
 
 class alanKontrolcu{
   boolean ctrlDurumu=false;
@@ -33,7 +33,7 @@ ArrayList<_alanYapi> alanlar=new ArrayList<_alanYapi>();
   void draw(){
     
    for(int i = 0; i<alanlar.size();i++){
-   alanlar.get(i).elemanim.draw(); //<>// //<>//
+   alanlar.get(i).elemanim.draw(); //<>//
   }// for sonu
 }// fonksiyon sonu
 
@@ -71,11 +71,11 @@ return (ctrlDurumu||shiftDurumu||altDurumu);
 
 void keyPressed(int tus){
   // println("alan kontrol içi kısmında başarılı bir çalışma");
-  //println("yazılan karekter = "+key+"  sayısal karşılığı = "+str(int(key)));
+//  println("yazılan karekter = "+key+"  sayısal karşılığı = "+str(int(key)));
   if(basiliKarekter()){
   //  println("basili karekter çalışması başarılı");
   if(tus==CODED){
- //  println("yazılan özel karekter = "+keyCode+"  sayısal karşılığı = "+str(int(keyCode)));
+  // println("yazılan özel karekter = "+keyCode+"  sayısal karşılığı = "+str(int(keyCode)));
    //17 ctrl ve 18 alt oluyo shift ise 16 oluyo
 if(keyCode>=16 && keyCode<=18){
  // println("buraya girdi");
@@ -89,11 +89,14 @@ if(keyCode>=16 && keyCode<=18){
 else{
 for(int i = 0; i<alanlar.size();i++){
   //   println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
-   if(alanlar.get(i).elemanim.ozelKarekterGirisiKontrol() && alanlar.get(i).elemanim.ozelKarekterGirisi){
+  if( alanlar.get(i).elemanim.ozelKarekterGirisi){
+   if(alanlar.get(i).elemanim.ozelKarekterGirisiKontrol() ){
  //     println("if  kısmında başarılı bir çalışma");
    alanlar.get(i).elemanim.ozelKarekterFonksiyonu(keyCode);
      break;
-   }
+   }// ikinci kontrol ifi
+  } // ilk kontrol ifi
+  
   }// for sonu
  }// if sonu
  }// else sonu
@@ -104,37 +107,25 @@ for(int i = 0; i<alanlar.size();i++){
  //     println("normal tuş girişi kısmında başarılı bir çalışma");
    for(int i = 0; i<alanlar.size();i++){
    //  println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
-   if(alanlar.get(i).elemanim.anaKarekterGirisiKontrolBasili() && alanlar.get(i).elemanim.anaKarekterGirisi){
-   //   println("if  kısmında başarılı bir çalışma");
+   // ifler önceden birleşikti ama üst fonksiyon çalıştıma mekanizmasının da devreye girmesinden kaynaklı olarak 
+   // iki parçaya ayrılarak iki denetimli kontrol yapısı oluşturuldu.
+   if(alanlar.get(i).elemanim.anaKarekterGirisiBasili){
+   if(alanlar.get(i).elemanim.anaKarekterGirisiKontrolBasili() ){
+      //println("if  kısmında başarılı bir çalışma");
    alanlar.get(i).elemanim.anaKarekterFonksiyonuBasili(tus,durumNo);
      break;
-   }
+   }// ikinci kontrol
+   }// ilk kontrol
   }// for sonu
  }
- 
- if(tus==10){
-   
-   
- }// entera basıldığında olacak
- 
-  if(tus==8){
-   // kod aktif alana gönderilip öyle çalıştırılacak.
-   for(int i = 0; i<alanlar.size();i++){
-  //   println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
-   if(alanlar.get(i).elemanim.silmeTusuGirisiKontrol() && alanlar.get(i).elemanim.silmeTusuGirisi){
- //     println("if  kısmında başarılı bir çalışma");
-   alanlar.get(i).elemanim.silmeTusuFonksiyonu();
-     break;
-   }
-  }// for sonu
- }// silme olduğunda olacaklar
+
   }//else sonu
   
   
   
   else{
  if(tus==CODED){
- //  println("yazılan özel karekter = "+keyCode+"  sayısal karşılığı = "+str(int(keyCode)));
+  // println("yazılan özel karekter = "+keyCode+"  sayısal karşılığı = "+str(int(keyCode)));
    //17 ctrl ve 18 alt oluyo shift ise 16 oluyo
 if(keyCode>=16 && keyCode<=18){
   switch(keyCode){
@@ -147,11 +138,13 @@ if(keyCode>=16 && keyCode<=18){
 else{
 for(int i = 0; i<alanlar.size();i++){
   //   println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
-   if(alanlar.get(i).elemanim.ozelKarekterGirisiKontrol() && alanlar.get(i).elemanim.ozelKarekterGirisi){
+  if(alanlar.get(i).elemanim.ozelKarekterGirisi){
+   if(alanlar.get(i).elemanim.ozelKarekterGirisiKontrol() ){
  //     println("if  kısmında başarılı bir çalışma");
    alanlar.get(i).elemanim.ozelKarekterFonksiyonu(keyCode);
      break;
-   }
+   }// ikinci kontrol ifi
+  }// ilk kontrol ifi sonu
   }// for sonu
  }// if sonu
  }// else sonu
@@ -162,32 +155,58 @@ for(int i = 0; i<alanlar.size();i++){
  //     println("normal tuş girişi kısmında başarılı bir çalışma");
    for(int i = 0; i<alanlar.size();i++){
  //    println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
-   if(alanlar.get(i).elemanim.anaKarekterGirisiKontrol() && alanlar.get(i).elemanim.anaKarekterGirisi){
+ if(alanlar.get(i).elemanim.anaKarekterGirisi){
+   if(alanlar.get(i).elemanim.anaKarekterGirisiKontrol()){
  //     println("if  kısmında başarılı bir çalışma");
    alanlar.get(i).elemanim.anaKarekterFonksiyonu(tus);
      break;
-   }
+   }// ikinci kontrol ifi
+ }// ilk kontrol ifi
   }// for sonu
  }
  
- if(tus==10){
+
+  }//else sonu
+  
+// Burda basılı olsada olmasada aynı yapıya sahip kodların çalışma mekanizması incelenecektir.  
+if(tus<32){
+  
+   if(tus==10){
    
    
  }// entera basıldığında olacak
  
-  if(tus==8){
+  else if(tus==8){
    // kod aktif alana gönderilip öyle çalıştırılacak.
    for(int i = 0; i<alanlar.size();i++){
   //   println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
-   if(alanlar.get(i).elemanim.silmeTusuGirisiKontrol() && alanlar.get(i).elemanim.silmeTusuGirisi){
+  if(alanlar.get(i).elemanim.silmeTusuGirisi){
+   if(alanlar.get(i).elemanim.silmeTusuGirisiKontrol()){
  //     println("if  kısmında başarılı bir çalışma");
    alanlar.get(i).elemanim.silmeTusuFonksiyonu();
      break;
-   }
+   }// ikinci if sonu
+  } // ilk if sonu
   }// for sonu
  }// silme olduğunda olacaklar
-  }//else sonu
-  
+ 
+ else if(tus==3 || tus==22 || tus==24 ){
+  // ctrl+ v = 22, ctrl + c=3, ctrl +x = 24
+      for(int i = 0; i<alanlar.size();i++){
+ //    println(i+" adlı sıraya göre değer "+str(alanlar.get(i).elemanim.anaKarekterGirisi));
+ if(alanlar.get(i).elemanim.kopyalamaYapistirmaGirisi){
+   if(alanlar.get(i).elemanim.kopyalamaYapistirmaGirisiKontrol()){
+ //     println("if  kısmında başarılı bir çalışma");
+   alanlar.get(i).elemanim.kopyalamaYapistirmaFonksiyonu(tus);
+     break;
+   }// ikici if sonu
+ }// ilk if onu
+  }// for sonu
+ }
+ 
+} // if sonu
+
+
 }// fonksiyon sonu
 
 void mousePressed(){
@@ -241,7 +260,7 @@ void mouseMoved(int x,int y){
       // son aktif alan değişmediyse her hangi bir değişikliğe gidilmesin diyoruz
       if(alanlar.get(sonAktifAlanHareket).elemanim.mouseHareketDurumu){ 
       alanlar.get(sonAktifAlanHareket).elemanim.mouseHareketFonksiyonu(x,y);
-        println("bu kısım çalışması başarılı");
+      //  println("bu kısım çalışması başarılı");
       
       if(sonAktifAlanHareket!=i){
       alanlar.get(sonAktifAlanHareket).elemanim.aktiflikHareket=false;

@@ -21,11 +21,8 @@ class buton extends _elemanYapi{
    aktifRenk=color(0,0,255);
    asilRenk=pasifRenk;
    // grafik oluşturma için ilk işlemimizi yaptık
-   grafigiOlustur();
- 
- 
+   grafigiOlustur(); 
   }//constructor
-
 
 
 void draw(){
@@ -50,38 +47,12 @@ grafik.endDraw();
 image(grafik,alanim.x,alanim.y);
 }// draw sonu
 
-
-void ilkCizim(){
-  grafik.beginDraw();
-// tüm grafiksel işlemler burda bitiyor
-  grafik.background(255);
-  grafik.stroke(0);
-  grafik.fill(255);
-//  println(alanim.w);
-  grafik.rect(0,0,alanim.w,alanim.h);
-  grafik.fill(0);
-  grafik.textSize(yaziBoyutu);
-  grafik.textAlign(LEFT, TOP);
-  grafik.smooth();
-  grafik.text(yazi,2,0);
-//tüm grafiksel işlemlerin bundan önce bitmesi gerekiyor.  
-grafik.endDraw();
-image(grafik,alanim.x,alanim.y);
-}
-
-
-
 // bu ilk grafiksel oluşumu temsil ediyor.
 void grafigiOlustur(){
   grafik = createGraphics(int(alanim.w),int(alanim.h));
   grafik.beginDraw();
   grafik.background(255);
   grafik.endDraw();
-  ilkCizim();
-}// fonksiyon sonu
-
-void aktiflikBitimi(){
-    ilkCizim();
 }// fonksiyon sonu
 
 void mouseTiklamaFonksiyonu(int x,int y){ 
@@ -103,13 +74,13 @@ calismaTiklama.run();
   void mouseHareketFonksiyonu(int x,int y){ 
   // burda yapıyla dinamik çalışma için teknik bir renk değişimi uygulama işlemi uyguluyor olacağız gibi görünüyor.
   asilRenk=aktifRenk;
-  println("hareket fonksiyonu başarılı olarak çalıştı");
+ // println("hareket fonksiyonu başarılı olarak çalıştı");
   }
   
     void aktiflikBitimiHareket(){ 
  // burda rengimizi geçmiş rengine çevirme işlemini yapacağız.
     asilRenk=pasifRenk;
-   println("aktiflik bitimi başarılı bir şekilde çalıştı");
+  // println("aktiflik bitimi başarılı bir şekilde çalıştı");
   }
 
 }// sınıf sonu

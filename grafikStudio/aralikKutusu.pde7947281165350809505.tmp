@@ -1,17 +1,12 @@
-class buton extends _elemanYapi{
+class aralikKutusu extends _elemanYapi{
  
-  dikdortgen yaziAlani;
   // mouse hareketine göre şekillenecek bir yapı asıl renk yapısı olmak üzer üç renk değişkenimiz var
   color pasifRenk,aktifRenk,asilRenk;
   PGraphics grafik;
-  String yazi;
-  float yaziBoyutu=18;
  // ArrayList<Float> uzunluklar=new ArrayList<Float>();
-  buton(float gx,float gy,float gw,float gh){
+  aralikKutusu(float gx,float gy,float gw,float gh){
    mouseTiklamaDurumu=true;
    mouseHareketDurumu=true;
-   yazi="";
-   yaziAlani=new dikdortgen(2,2,gw-4,gh-4);
    alanim =new tekAlan(); 
    alanim.x=gx; alanim.y=gy; alanim.w=gw; alanim.h=gh;
    alanim.elemanim=this;
@@ -34,13 +29,7 @@ grafik.beginDraw();
   grafik.fill(asilRenk);
 //  println(alanim.w);
   grafik.rect(0,0,alanim.w,alanim.h);
-  
-  // Burdaki fili yazının görünmesi için siyah moda alıyoruz şimdilik.
-  grafik.fill(0);
-  grafik.textSize(yaziBoyutu);
-  grafik.textAlign(LEFT, TOP);
-  grafik.text(yazi,yaziAlani.x,0);
-  //text("aktif",alanim.x,alanim.y);
+
  
 //tüm grafiksel işlemlerin bundan önce bitmesi gerekiyor.  
 grafik.endDraw();

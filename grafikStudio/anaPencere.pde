@@ -31,7 +31,8 @@ class anaPencere extends normalPencere{
     println("sistem başarılı bir çalışma işleminden geçmiş bulunmaktadır.");
   }};
     al.alanEkle(buton1);
-    
+       final aralikKutusu aralik1=new aralikKutusu(10,650,140,20);
+    al.alanEkle(aralik1);
  }// fonksiyon sonu
  
   

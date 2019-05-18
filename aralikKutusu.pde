@@ -1,21 +1,18 @@
-class buton extends _elemanYapi{
+class aralikKutusu extends _elemanYapi{
  
-  dikdortgen yaziAlani;
   // mouse hareketine göre şekillenecek bir yapı asıl renk yapısı olmak üzer üç renk değişkenimiz var
+  
   color pasifRenk,aktifRenk,asilRenk;
   PGraphics grafik;
-  String yazi;
-  float yaziBoyutu=18;
+  int imlecKonum;
  // ArrayList<Float> uzunluklar=new ArrayList<Float>();
-  buton(float gx,float gy,float gw,float gh){
+  aralikKutusu(float gx,float gy,float gw,float gh){
    mouseTiklamaDurumu=true;
    mouseHareketDurumu=true;
-   yazi="";
-   yaziAlani=new dikdortgen(2,2,gw-4,gh-4);
    alanim =new tekAlan(); 
    alanim.x=gx; alanim.y=gy; alanim.w=gw; alanim.h=gh;
    alanim.elemanim=this;
-   
+   imlecKonum=0;
    // renk oluşumları kısmı
    pasifRenk=color(255);
    aktifRenk=color(0,0,255);
@@ -33,14 +30,11 @@ grafik.beginDraw();
   grafik.stroke(0);
   grafik.fill(asilRenk);
 //  println(alanim.w);
+  grafik.strokeWeight(1);
   grafik.rect(0,0,alanim.w,alanim.h);
-  
-  // Burdaki fili yazının görünmesi için siyah moda alıyoruz şimdilik.
-  grafik.fill(0);
-  grafik.textSize(yaziBoyutu);
-  grafik.textAlign(LEFT, TOP);
-  grafik.text(yazi,yaziAlani.x,0);
-  //text("aktif",alanim.x,alanim.y);
+  grafik.strokeWeight(3);
+  grafik.stroke(255,0,0);
+  grafik.line(imlecKonum,0,imlecKonum,alanim.h);
  
 //tüm grafiksel işlemlerin bundan önce bitmesi gerekiyor.  
 grafik.endDraw();
@@ -64,10 +58,15 @@ float xDegeri=x-alanim.x;
 //gelen y değerinin bir anlamı yok biz yinede bu değeri tutmak istiyoruz.
 float uDegeri=y-alanim.y;
 // bu yapı ileri ve geri yapılarını dinamik kullanmak için oluşturulan bir sorgudur.
-
+if(xDegeri<0)
+xDegeri=0;
+else if(xDegeri>alanim.w)
+xDegeri=alanim.w;
+imlecKonum=int(xDegeri);
 // yukardaki bilgiler yazıkutusu yapılandırmasından kalanlardır kullanıp kullanılmayacağı ilerde farklılık gösterebilir amacıyla şimdilik yerli yerinde bırakılıyor
 // sonrasında detaylı bir şekilde bir inceleme ve şekillenme işlemine tabi tututalabilir.
-calismaTiklama.run();
+//calismaTiklama.run();
+
 }// fonksiyon sonu
 
 

@@ -1,6 +1,7 @@
 class yaziKutusu extends _elemanYapi{
   float []yazia; // bu yapı achii değerlerine ait uzunlukları veriyor.
   dikdortgen imlec;
+  kopyalaYapistir kopYap;
   dikdortgen yaziAlani;
   int sayacImlec;
   int imlecKonum; // bu hangi harften sonra imlecin geldiğini bilmek için oluşturuldu
@@ -22,6 +23,7 @@ class yaziKutusu extends _elemanYapi{
       // 2 tanesi ise boşluk oluşturmak için kayma yapıldı.
      anaKarekterGirisi = true;
      ozelKarekterGirisi = true;
+     kopyalamaYapistirmaGirisi = true;
      silmeTusuGirisi=true;
      anaKarekterGirisiBasili = true;
      mouseTiklamaDurumu=true;
@@ -37,7 +39,8 @@ class yaziKutusu extends _elemanYapi{
    karekterhesap();
    imlecOlustur();
    sayacImlec=0;
- 
+   
+   kopYap= new kopyalaYapistir();
   }//constructor
 
 void karekterhesap(){
@@ -152,6 +155,36 @@ void yaziAlaniKontrol(){
    yaziAlani.x=2-(toplamUzunluk-yaziAlani.w);
  }// if sonu
 }// fonksiyon sonu
+
+void kopyalamaYapistirmaFonksiyonu(int tus){   
+  
+switch(tus){
+ case 3: // kopyalama tuşu 
+ break;
+ 
+ case 22: // yapıştırma tuşu 
+yapistirmaIslemi();  break;
+
+ case 24: // kesme tuşu 
+ break;
+}// switch sonu
+
+}// fonksiyon sonu
+
+void yapistirmaIslemi(){
+  println("yapıştırma kodu başarılı");
+      String islenecek=kopYap.yapistir();
+      for(int i=0;i<islenecek.length();i++){
+       
+        int tus=int(islenecek.charAt(i));
+        if((tus>=32 && tus<127)||(tus>=128 && tus<352)){
+          anaKarekterFonksiyonu(tus);
+        }// iç if sonu
+          
+      }// for sonu
+}
+
+  
 
 void karekterEkleme(int tus){
   if(imlecKonum==-1){
@@ -270,7 +303,9 @@ boolean anaKarekterGirisiKontrolBasili(){
 boolean ozelKarekterGirisiKontrol(){
  return aktiflik;
 }// fonksiyon sonu
-
+boolean kopyalamaYapistirmaGirisiKontrol(){
+  return aktiflik;
+}
 boolean silmeTusuGirisiKontrol(){
  return aktiflik;
 }// fonksiyon sonu
@@ -280,13 +315,8 @@ void imlecOlustur(){
   imlec = new dikdortgen(2,2,yaziAlani.w+2,alanim.h-2);
 }//
 
- void anaKarekterFonksiyonuBasili(int tus,int no){ 
-   if(no==4){
-    if(tus==int(char('v'))||tus==int(char('V'))){
-      println("yapıştırma kodu başarılı");
-   }// iç if sonu
- 
- }// dış if sonu
+ void anaKarekterFonksiyonuBasili(int gelenTus,int no){ 
+   println("basili fonksiyon başarılı gelen tus : "+ gelenTus+ " no : "+ no );
  }// fonksiyon sonu
 
 void imlecGuncelle(){
