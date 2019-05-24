@@ -1,3 +1,4 @@
+
 // öncelik sıralarım ve algoritmik kurgularım bilindik yapılardan çok farklı diye
 //kendi yolu çizmekten niye geri kalayım ki
 
@@ -8,17 +9,19 @@
 //final olarak tanımlıyoruz ki her yerden kolayca ulaşabilelim
 static pencereKontrolu pKontrol;
 
+// her yerde yapılandırma olarak çalışacağı için önemli bir yapı sonrasında özel if yapısında beslenecek
+
 int r=5;
 void setup(){
 
 pKontrol=new pencereKontrolu();
-  size(640,480); 
+  size(1280,600); 
  // karekterhesap(2);
 frameRate(60);
 }// ana yapının sonu
 
 void draw(){
- // background(0);
+ // background(128);
   
   /*
 stroke(153);
@@ -49,13 +52,6 @@ void keyReleased(){
 
 void mousePressed(){
  pKontrol.mousePressed(mouseX,mouseY);
-}
-void mouseReleased(){
- pKontrol.mouseReleased(mouseX,mouseY);
-}
-
-void mouseDragged(){
- pKontrol.mouseDragged(mouseX,mouseY);
 }
 
 void mouseMoved(){

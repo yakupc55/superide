@@ -8,16 +8,6 @@ class alanKontrolcu{
   boolean ctrlDurumu=false;
   boolean altDurumu=false;
   boolean shiftDurumu=false;
-
-  // tıklanma zamanı ve durumu yeni bir yapılandırma olan sürükleme mekanizmasını tetiklemek için geliştirilmiş mekanizmik
-  // bir yapıyı ifade ediyor bu yapıya minimum belirlenen zaman yakalınca sürükleme yapısı aktif olmuş oluyor.
-  boolean suruklemeDurumu=false;
-  float sonZaman=0.0;
-  float zamanArtisMiktari=0.0;
-  // suruklenen değerin net olarak bilinmesi için oluşturulmuş iki adet veri tutucudur.
-  int suruklemeOncesiX, suruklemeOncesiY=0;
-  // şuan için kullanılan bir yapı değiller eğer sonrası içinde öyle olursa silinmesi gerekiyor
-  int sonSuruklemeX, sonSuruklemeY=0;
   int durumNo=0;
  int aktifAlan=0; //ana alan demek oluyor 
  // bu direk aktif olarak betimlenen alan ana alanı temsil ediyor.
@@ -60,9 +50,6 @@ float yKayma=0;
   }// fonksiyon sonu
   
   void draw(){
-    //burda zamansal yapılarda hassas hesaplama için süreki bir kontrol yapısı çalıştırılıyor
-    zamanArtisMiktari=zamanArtisiHesapla();
-    
     translate(xKayma,yKayma);
       for(int i = 0; i<ozelAlanlar.size();i++){
    ozelAlanlar.get(i).elemanim.draw();
@@ -100,11 +87,7 @@ boolean basiliKarekter(){
  //println("ctrl durumu : "+ctrlDurumu+"alt durumu : "+altDurumu+"shift durumu : "+shiftDurumu);
 durumNo=((ctrlDurumu==true)?4:0)+((altDurumu==true)?2:0)+((shiftDurumu==true)?1:0);
 //println(durumNo);
-
-// shift durumunu teknik olarak durum no içinde kullanıyoruz ama sistematik olarak
-// if yapısında kullanıp basili durumun akışını bozmamaya çalıştık shift ile kullanılan diğer durumlar için
-// sonradan tekrar bir yapılandırmaya hızlı bir şekilde gidilebilir.
-return (ctrlDurumu||altDurumu);
+return (ctrlDurumu||shiftDurumu||altDurumu);
 
 }
 
@@ -252,27 +235,14 @@ void mousePressed(){
 
  
 }//fonksiyon sonu
-
-void mouseReleased(int x, int y){
-
+ void mousePressed(int x, int y){
+ // ilk kısım eski aktif kısmın değiştirilmesi ve yeni aktif kısmın atanması
+ //aktif alan ataması için alan taraması işlemi yapılacak.
+ 
+ // bu ekleme yapıları alansal değişimler için uygulanıyor özellikle telefon yapılandırması için.
  x+=xKayma; 
  y+=yKayma;
-
- if(!suruklemeDurumu)
- mouseTiklama(x,y);
-
-suruklemeDurumu=false;
-
-}// fonksiyon sonu
-
- void mousePressed(int x, int y){
-suruklemeOncesiX=x;
-suruklemeOncesiY=y;
-}// fonksiyon sonu
-
-void mouseTiklama(int x,int y){
-  
-  bosForAktiflik=true;
+ bosForAktiflik=true;
  for(int i = 0; i<alanlar.size();i++){
   if(alanTaramaSonucu(i,x,y)){
     bosForAktiflik=false;
@@ -301,9 +271,11 @@ if(sonAktifAlan>=0 && bosForAktiflik==true){
   alanlar.get(sonAktifAlan).elemanim.aktiflik=false;
   alanlar.get(sonAktifAlan).elemanim.aktiflikBitimi();
   sonAktifAlan=-1;
-}// if sonu
-
 }
+// hiç bir alana dek gelmese dahi son aktif alanı kapatıyoruz. son aktifliği ise -1 yapıyoruz.
+
+}// fonksiyon sonu
+
 
 void mouseMoved(int x,int y){
    // sistem şuan dinamik olarak çalışır durumda.
@@ -343,21 +315,6 @@ void mouseMoved(int x,int y){
 
 }// fonksiyon sonu
   
-void mouseSurukleme(int x,int y){
-//  println("sürükleme çalışıyor");
-   for(int i = 0; i<alanlar.size();i++){
-   if(alanTaramaSonucu(i,x,y)){
-     alanlar.get(i).elemanim.mouseSuruklemeFonksiyonu(suruklemeOncesiX,suruklemeOncesiY,(x-suruklemeOncesiX),(y-suruklemeOncesiY));
-  }// if sonu
-  }// for sonu
-suruklemeOncesiX=x;
-suruklemeOncesiY=y;
-}
-  
-void mouseDragged(int x,int y){
-  suruklemeDurumu=true;
-    mouseSurukleme(x,y);
-}
 
 boolean alanTaramaSonucu(int gelenIndaks,int x,int y){
   _alanYapi a=alanlar.get(gelenIndaks);
@@ -373,13 +330,6 @@ boolean alanTaramaSonucu(int gelenIndaks,int x,int y){
 // bu yapı teknik olarak kontrolcüde değiştirmek istediğimiz yapılar olursa onu değiştirmek amacıyla kullanacağımız bir yapı haline getiriyor.
 void kontrolcuSifirlama(){
   
-}
-
-// bu yapı zamanı hesaplamak için kullanılan teknik bir yapıdır sadece
-float zamanArtisiHesapla(){
-float fark=(millis()/1000.0)-sonZaman; 
-sonZaman=millis()/1000.0;  
-return fark;
 }
 
 }//class sonu

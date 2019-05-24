@@ -12,8 +12,6 @@ void keyReleased(int x);
  void keyPressed();
  void keyPressed(int tus);
  void mouseMoved(int x,int y);
- void mouseReleased(int x,int y);
- void mouseDragged(int x,int y);
 }// sınıf sonu
 
 class normalPencere implements pencere{
@@ -55,12 +53,5 @@ void keyReleased(int x){
 void mouseMoved(int x,int y){
    al.mouseMoved(x,y);
 }
-void mouseReleased(int x, int y){
- al.mouseReleased(x,y);
-}// fonksiyon sonu
-
- void mouseDragged(int x,int y){
- al.mouseDragged(x,y);
-}// fonksiyon sonu
-
+  
 }// sınıf sonu

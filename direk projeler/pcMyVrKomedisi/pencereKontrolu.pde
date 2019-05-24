@@ -38,12 +38,4 @@ void mouseMoved(int x, int y){
  aktifPencere.mouseMoved(x,y);
 }// fonksiyon sonu
 
-void mouseReleased(int x, int y){
- aktifPencere.mouseReleased(x,y);
-}// fonksiyon sonu
-
-void mouseDragged(int x, int y){
- aktifPencere.mouseDragged(x,y);
-}// fonksiyon sonu
-
 }//sınıf sonu

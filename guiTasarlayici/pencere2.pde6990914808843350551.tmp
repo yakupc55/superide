@@ -1,0 +1,27 @@
+class pencere2 implements pencere{
+ //    int ol;
+   int l=r;
+  
+ pencere2(){
+   //ol=pKontrol.z;
+     
+        println("l : "+str(l));
+ }// constructor sonu
+   void draw(){
+
+     
+   }
+ 
+ void setup() {
+   
+    println("ol : "+str(pKontrol.z));
+ }
+  
+ void mousePressed(){
+   
+   
+   
+ }
+  
+  
+}// sınıf sonu

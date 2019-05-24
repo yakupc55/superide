@@ -1,3 +1,4 @@
+
 class anaPencere extends normalPencere{
 
  anaPencere(pencereKontrolu gelenKontrol){
@@ -12,7 +13,6 @@ class anaPencere extends normalPencere{
    }
  
  void setup() {
-    al = new alanKontrolcu();
     yaziKutusu yaz1=new yaziKutusu(10,10,100,20);
     al.alanEkle(yaz1);
      yaziKutusu yaz2=new yaziKutusu(200,50,100,20);
